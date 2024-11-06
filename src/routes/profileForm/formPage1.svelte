@@ -5,8 +5,7 @@
   import { validator } from '@felte/validator-yup';
   import * as yup from 'yup';
 
-	export let initialValues;
-	export let onSubmit;
+  let { initialValues, onSubmit } = $props();
 
 /*
   const stateTerritory = [
@@ -64,13 +63,15 @@
           type='text'
           class="shadow appearance-none border rounded w-full pt-3 py-3 px-3 text-surface-800-100-token bg-surface-50-900-token leading-tight focus:outline-none focus:shadow-outline"
         />
-        <ValidationMessage for="name" let:messages={messages}>
-        <ul aria-live="polite">
-          {#each messages ?? [] as message}
-            <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
-          {/each}
-        </ul>
-        </ValidationMessage>
+        <ValidationMessage for="name" >
+        {#snippet children({ messages: messages })}
+                    <ul aria-live="polite">
+            {#each messages ?? [] as message}
+              <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
+            {/each}
+          </ul>
+                            {/snippet}
+                </ValidationMessage>
         <label for='otherNames' class='block text-left text-surface-800-100-token pt-2 text-md font-bold'>
           Previous or Other Names
         </label>
@@ -89,13 +90,15 @@
           type='text'
           class="shadow appearance-none border rounded w-full pt-3 py-3 px-3 text-surface-800-100-token bg-surface-50-900-token leading-tight focus:outline-none focus:shadow-outline"
         />
-        <ValidationMessage for="email" let:messages={messages}>
-        <ul aria-live="polite">
-          {#each messages ?? [] as message}
-            <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
-          {/each}
-        </ul>
-        </ValidationMessage>
+        <ValidationMessage for="email" >
+        {#snippet children({ messages: messages })}
+                    <ul aria-live="polite">
+            {#each messages ?? [] as message}
+              <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
+            {/each}
+          </ul>
+                            {/snippet}
+                </ValidationMessage>
         <label for='mobile' class='required block text-left text-surface-800-100-token text-md font-bold pt-2'>
           Mobile
         </label>
@@ -106,13 +109,15 @@
           placeholder='Mobile number in 10 digits format, no spaces'
           class="shadow appearance-none border rounded w-full pt-3 py-3 px-3 text-surface-800-100-token bg-surface-50-900-token leading-tight focus:outline-none focus:shadow-outline"
         />
-        <ValidationMessage for="mobile" let:messages={messages}>
-        <ul aria-live="polite">
-          {#each messages ?? [] as message}
-            <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
-          {/each}
-        </ul>
-        </ValidationMessage>
+        <ValidationMessage for="mobile" >
+        {#snippet children({ messages: messages })}
+                    <ul aria-live="polite">
+            {#each messages ?? [] as message}
+              <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
+            {/each}
+          </ul>
+                            {/snippet}
+                </ValidationMessage>
         <label for='dob' class='required block text-left text-surface-800-100-token text-md font-bold pt-2'>
           Date of Birth
         </label>
@@ -123,13 +128,15 @@
           class="shadow appearance-none border rounded w-full pt-3 py-3 px-3 text-surface-800-100-token bg-surface-50-900-token leading-tight focus:outline-none focus:shadow-outline"
           placeholder='DD-MM-YYYY'
         />
-        <ValidationMessage for="dob" let:messages={messages}>
-        <ul aria-live="polite">
-          {#each messages ?? [] as message}
-            <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
-          {/each}
-        </ul>
-        </ValidationMessage>
+        <ValidationMessage for="dob" >
+        {#snippet children({ messages: messages })}
+                    <ul aria-live="polite">
+            {#each messages ?? [] as message}
+              <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
+            {/each}
+          </ul>
+                            {/snippet}
+                </ValidationMessage>
         <label
           for='street'
           class='required block text-left text-surface-800-100-token text-md font-bold pt-2'
@@ -143,13 +150,15 @@
           placeholder="Everything up to the City, Town or Suburb"
           class="shadow appearance-none border rounded w-full pt-3 py-3 px-3 text-surface-800-100-token bg-surface-50-900-token leading-tight focus:outline-none focus:shadow-outline"
         />
-        <ValidationMessage for="street" let:messages={messages}>
-        <ul aria-live="polite">
-          {#each messages ?? [] as message}
-            <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
-          {/each}
-        </ul>
-        </ValidationMessage>
+        <ValidationMessage for="street" >
+        {#snippet children({ messages: messages })}
+                    <ul aria-live="polite">
+            {#each messages ?? [] as message}
+              <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
+            {/each}
+          </ul>
+                            {/snippet}
+                </ValidationMessage>
         <label
           for='city'
           class='required block text-left text-surface-800-100-token text-md font-bold pt-2'
@@ -163,13 +172,15 @@
          placeholder="Can be both Suburb & City/Town: 'Manly' or 'Manly, Sydney'"
          class="shadow appearance-none border rounded w-full pt-3 py-3 px-3 text-surface-800-100-token bg-surface-50-900-token leading-tight focus:outline-none focus:shadow-outline"
         />
-        <ValidationMessage for="city" let:messages={messages}>
-        <ul aria-live="polite">
-          {#each messages ?? [] as message}
-            <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
-          {/each}
-        </ul>
-        </ValidationMessage>
+        <ValidationMessage for="city" >
+        {#snippet children({ messages: messages })}
+                    <ul aria-live="polite">
+            {#each messages ?? [] as message}
+              <li class="text-left text-error-500-400-token text-sm font-bold">{message}</li>
+            {/each}
+          </ul>
+                            {/snippet}
+                </ValidationMessage>
         <label
           for='state'
           class='required block text-left text-surface-800-100-token text-md font-bold pt-2'
@@ -191,13 +202,15 @@
           <option value="Victoria">Victoria</option>
           <option value="Western Australia">Western Australia</option>
         </select>
-        <ValidationMessage for="state" let:messages={messages}>
-        <ul aria-live="polite">
-          {#each messages ?? [] as message}
-            <li class="text-left text-error-500-400-token text-sm font-bold">{messages}</li>
-          {/each}
-        </ul>
-        </ValidationMessage>
+        <ValidationMessage for="state" >
+        {#snippet children({ messages: messages })}
+                    <ul aria-live="polite">
+            {#each messages ?? [] as message}
+              <li class="text-left text-error-500-400-token text-sm font-bold">{messages}</li>
+            {/each}
+          </ul>
+                            {/snippet}
+                </ValidationMessage>
         <label for='postcode' class='required block text-left text-surface-800-100-token text-md font-bold pt-2'>
           Postcode
         </label>
@@ -208,13 +221,15 @@
           placeholder='####'
           class="shadow appearance-none border rounded w-full pt-3 py-3 px-3 text-surface-800-100-token bg-surface-50-900-token leading-tight focus:outline-none focus:shadow-outline"
         />
-        <ValidationMessage for="postcode" let:messages={messages}>
-        <ul aria-live="polite">
-          {#each messages ?? [] as message}
-            <li class="text-left text-error-500-400-token text-sm font-bold">{messages}</li>
-          {/each}
-        </ul>
-        </ValidationMessage>
+        <ValidationMessage for="postcode" >
+        {#snippet children({ messages: messages })}
+                    <ul aria-live="polite">
+            {#each messages ?? [] as message}
+              <li class="text-left text-error-500-400-token text-sm font-bold">{messages}</li>
+            {/each}
+          </ul>
+                            {/snippet}
+                </ValidationMessage>
         <label
           for='previousAddress'
           class='block text-left text-surface-800-100-token text-md font-bold pt-2'

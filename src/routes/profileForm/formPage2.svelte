@@ -6,11 +6,10 @@
   import { slide } from "svelte/transition";
   import { popup } from '@skeletonlabs/skeleton';
   import type { PopupSettings } from '@skeletonlabs/skeleton';
+	import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+	import { DynamoDBDocumentClient, GetCommand } from "@aws-sdk/lib-dynamodb";
 
-
-	export let initialValues;
-	export let onSubmit;
-	export let onBack;
+  let { initialValues, onSubmit, onBack } = $props();
 
   const popupFocusBlur: PopupSettings = {
     event: 'focus-blur',
@@ -41,9 +40,11 @@
     'AB negative',
   ]
 
-  let selected = [];
+  let selected = $state([]);
 
-	const { form, data } = createForm({ onSubmit, initialValues });
+	const { form, data, createSubmitHandler } = createForm({ onSubmit, initialValues });
+
+
 </script>
 
 <div class='container h-full mx-auto flex justify-center'>
@@ -58,7 +59,7 @@
         <button
           type="button"
           class="w-200 bg-blue-500 hover:bg-blue-700 text-white inline-flex items-center font-bold py-2 px-7 mt-6 rounded focus:outline-none focus:shadow-outline"
-          on:click={() => onBack($data)}
+          onclick={() => onBack($data)}
         >
           <Icon icon="mdi:arrow-left"/>
           &nbsp;Previous
@@ -75,7 +76,7 @@
 				liOptionClass="text-surface-800-100-token bg-surface-50-900-token"
 				ulSelectedClass="text-surface-800-100-token bg-surface-50-900-token"
 				liSelectedClass="text-surface-800-100-token bg-surface-50-900-token"
-				liActiveOptionClass="text-surface-800-100-token bg-surface-50-900-token"
+				liActiveOptionClass="bg-darkGray-400"
         placeholder="Select categories, then complete relevant fields"
         options="{categories}"
         bind:selected
@@ -566,6 +567,7 @@
         <button
             class="w-200 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-12 mt-6 rounded focus:outline-none focus:shadow-outline"
             type="submit"
+						onsubmit={handleSubmit}
         >
           Save
         </button>
@@ -574,6 +576,3 @@
   </div>
 </div>
 
-<styles>
-
-</styles>

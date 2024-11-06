@@ -6,7 +6,6 @@
 		<figure>
 			<section class="img-bg">
       </section>
-      <img src="wiw-logo.png" class="img-fluid" alt="Whereiswill Logo"><br/>
 			<img src="wiw-logo.svg" class="img-fluid" alt="Whereiswill Logo 2">
     </figure>
 	</div>

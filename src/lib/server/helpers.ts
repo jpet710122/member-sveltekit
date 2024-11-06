@@ -1,23 +1,5 @@
-import { env } 
 
-export function getSignInUrl(): string {
-	const baseUrl = $env.COGNITO_BASE_URI;
-	const clientId = $env.COGNITO_CLIENT_ID;
-
-	// The login api endpoint with the required parameters.
-	const loginUrl = new URL("/login", baseUrl);
-	loginUrl.searchParams.set("response_type", "code");
-	loginUrl.searchParams.set("client_id", clientId);
-	loginUrl.searchParams.set("redirect_uri", getRedirectUrl());
-	loginUrl.searchParams.set("scope", "email openid phone");
-
-	return loginUrl.toString();
-}
-
-function getRedirectUrl(): string {
-	return new URL($env.CF_PAGES_URL).toString();
-}
-
+import { COGNITO_BASE_URI, COGNITO_CLIENT_ID, COGNITO_CLIENT_SECRET, CF_PAGES_URL } from '$env/static/private';
 interface Tokens {
 	access_token: string;
 	id_token: string;
@@ -55,9 +37,9 @@ type TokenOptions = TokenOptionsCode | TokenOptionsRefresh;
  * @see https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html
  */
 export async function getTokens(options: TokenOptions) {
-	const baseUrl = $env.COGNITO_BASE_URI;
-	const clientId = $env.COGNITO_CLIENT_ID;
-	const clientSecret = $env.COGNITO_CLIENT_SECRET;
+	const baseUrl = COGNITO_BASE_URI;
+	const clientId = COGNITO_CLIENT_ID;
+	const clientSecret = COGNITO_CLIENT_SECRET;
 
 	// Generate the Authorization header value (basic auth) using the client ID and secret.
 	const authHeader = btoa(`${clientId}:${clientSecret}`);
@@ -97,19 +79,6 @@ export async function getTokens(options: TokenOptions) {
 
 	return (await response.json()) as Tokens;
 }
-
-export function getSignOutUrl(): string {
-	const baseUrl = $env/static/private.COGNITO_BASE_URI;
-	const clientId = $env.COGNITO_CLIENT_ID;
-
-	const logoutUrl = new URL("/logout", baseUrl);
-	logoutUrl.searchParams.set("response_type", "code");
-	logoutUrl.searchParams.set("client_id", clientId);
-	logoutUrl.searchParams.set("redirect_uri", getRedirectUrl());
-
-	return logoutUrl.toString();
-}
-
-export function parseJWT<String>(token: string): String {
-	return JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
-}
+	export function getRedirectUrl(): string {
+		return new URL('$lib/auth/callback/', CF_PAGES_URL).toString();
+	}
